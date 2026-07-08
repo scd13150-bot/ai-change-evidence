@@ -192,6 +192,10 @@ node src/cli.js run "npm test"
 node src/cli.js status
 node src/cli.js brief --compact 8k
 node src/cli.js brief --print --no-evidence
+node src/cli.js collect [options]
+node src/cli.js doctor [--json]
+node src/cli.js export [--out <dir>] [--compact 8k]
+node src/cli.js prune [--apply] [--max-age-days <n>]
 ```
 
 Command roles:
@@ -204,6 +208,9 @@ Command roles:
 - `status`: summarizes the current task ledger for humans.
 - `brief`: creates `.ace/handoff.md` for the next AI agent.
 - `collect`: lower-level evidence collector for current project changes.
+- `doctor`: runs health checks on the local ACE setup (config, ledger, validation, git, scripts, policy, retention, integration).
+- `export`: creates a portable export bundle with experience, handoff, and doctor artifacts.
+- `prune`: cleans up expired ledger entries and run artifacts according to retention policy; `--apply` to actually remove, dry-run by default.
 
 `ace context` is kept as a compatibility alias for `ace experience`.
 
