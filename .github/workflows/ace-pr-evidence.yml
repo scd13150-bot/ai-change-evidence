@@ -1,0 +1,37 @@
+name: ACE PR Evidence
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - name: Build ACE handoff brief
+        run: |
+          node src/cli.js start "Review pull request #${{ github.event.pull_request.number }}" --reset
+          node src/cli.js collect --since origin/${{ github.base_ref }} --compact 8k --prompt --no-write > ace-review-prompt.md
+          node src/cli.js brief --print --compact 8k > ace-handoff.md
+      - name: Comment ACE evidence
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "## ACE Engineering Experience"
+            echo
+            sed -n '1,120p' ace-handoff.md
+          } > ace-comment.md
+          gh pr comment ${{ github.event.pull_request.number }} --body-file ace-comment.md
