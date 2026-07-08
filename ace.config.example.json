@@ -1,0 +1,57 @@
+{
+  "ignore": [
+    ".ace/**",
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    "coverage/**",
+    "*.log"
+  ],
+  "limits": {
+    "maxFiles": 120,
+    "maxDiffBytes": 60000,
+    "maxOutputBytes": 12000,
+    "maxPackBytes": 2000000,
+    "timeoutSeconds": 120
+  },
+  "preferredCommands": [
+    {
+      "id": "unit-tests",
+      "family": "test",
+      "command": "npm test",
+      "reason": "Default project test command for handoff evidence."
+    },
+    {
+      "id": "lint",
+      "family": "lint",
+      "command": "npm run lint",
+      "reason": "Static check evidence before publishing."
+    }
+  ],
+  "runPolicy": {
+    "allow": [],
+    "deny": [
+      "git push *",
+      "npm publish *",
+      "rm -rf *",
+      "Remove-Item * -Recurse *"
+    ]
+  },
+  "semantic": {
+    "enabled": false
+  },
+  "prompt": {
+    "profile": "ai-coding-handoff",
+    "compactBudget": "8k",
+    "instructions": [
+      "Treat ACE as the current engineering experience handoff.",
+      "Do not repeat failed attempts unless new evidence justifies it."
+    ],
+    "responseFormat": [
+      "Current task understanding.",
+      "Known failed attempts and do-not-repeat warnings.",
+      "Missing evidence.",
+      "Next smallest validated step."
+    ]
+  }
+}

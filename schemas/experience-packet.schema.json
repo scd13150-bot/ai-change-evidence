@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-change-evidence.local/schemas/experience-packet.schema.json",
+  "title": "ACE Experience Packet",
+  "description": "Portable engineering experience handoff packet for AI coding agents.",
+  "type": "object",
+  "required": [
+    "schema",
+    "role",
+    "generatedAt",
+    "projectDir",
+    "objective",
+    "experienceSummary",
+    "state",
+    "recentTimeline",
+    "failedCommands",
+    "unresolvedFailedCommands",
+    "validation",
+    "invalidatedPaths",
+    "doNotRepeat",
+    "evidence",
+    "missingEvidence",
+    "suggestedNextEvidence",
+    "semanticImpact",
+    "agentInstructions"
+  ],
+  "properties": {
+    "schema": {
+      "const": "ace.experience-packet.v1"
+    },
+    "role": {
+      "const": "engineering-experience-handoff"
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "projectDir": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "experienceSummary": {
+      "type": "object",
+      "required": [
+        "status",
+        "entries",
+        "failedCommands",
+        "passedCommands",
+        "unresolvedFailedCommands",
+        "resolvedFailedCommands",
+        "doNotRepeatItems",
+        "repeatedFailurePatterns",
+        "evidenceStatus",
+        "highMissingEvidence",
+        "riskSignals",
+        "nextActionBias"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "has-failed-validation",
+            "missing-critical-evidence",
+            "ledger-only",
+            "validated-so-far",
+            "needs-validation"
+          ]
+        },
+        "entries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolvedFailedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resolvedFailedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "doNotRepeatItems": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "repeatedFailurePatterns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidenceStatus": {
+          "enum": ["available", "unavailable", "not-requested"]
+        },
+        "highMissingEvidence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "riskSignals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextActionBias": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "entries",
+        "notes",
+        "commands",
+        "passedCommands",
+        "failedCommands",
+        "unresolvedFailedCommands",
+        "resolvedFailedCommands",
+        "latestFailure",
+        "latestHistoricalFailure",
+        "repeatedFailures"
+      ],
+      "properties": {
+        "entries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "commands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolvedFailedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resolvedFailedCommands": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latestFailure": {
+          "anyOf": [
+            { "$ref": "#/$defs/commandExperience" },
+            { "type": "null" }
+          ]
+        },
+        "latestHistoricalFailure": {
+          "anyOf": [
+            { "$ref": "#/$defs/commandExperience" },
+            { "type": "null" }
+          ]
+        },
+        "repeatedFailures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["signature", "count"],
+            "properties": {
+              "signature": { "type": "string" },
+              "count": { "type": "integer", "minimum": 2 }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "recentTimeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "at", "kind"],
+        "properties": {
+          "id": { "type": "string" },
+          "at": { "type": "string" },
+          "kind": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "failedCommands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/commandExperience"
+      }
+    },
+    "unresolvedFailedCommands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/commandExperience"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "state",
+        "commands",
+        "passed",
+        "failed",
+        "unresolvedFailures",
+        "resolvedFailures",
+        "latestFailure",
+        "latestHistoricalFailure",
+        "unresolvedFailureSignatures",
+        "resolvedFailureSignatures",
+        "failureSignatures",
+        "latestCommands"
+      ],
+      "properties": {
+        "state": {
+          "enum": ["failed", "passed", "not-run"]
+        },
+        "commands": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "unresolvedFailures": { "type": "integer", "minimum": 0 },
+        "resolvedFailures": { "type": "integer", "minimum": 0 },
+        "latestFailure": {
+          "anyOf": [
+            { "$ref": "#/$defs/commandExperience" },
+            { "type": "null" }
+          ]
+        },
+        "latestHistoricalFailure": {
+          "anyOf": [
+            { "$ref": "#/$defs/commandExperience" },
+            { "type": "null" }
+          ]
+        },
+        "unresolvedFailureSignatures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "resolvedFailureSignatures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "failureSignatures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "latestCommands": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/commandExperience" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "invalidatedPaths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "properties": {
+          "kind": { "type": "string" },
+          "text": { "type": "string" },
+          "signature": { "type": "string" },
+          "count": { "type": "integer", "minimum": 1 }
+        },
+        "additionalProperties": true
+      }
+    },
+    "doNotRepeat": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["available", "unavailable", "not-requested"]
+        },
+        "headline": { "type": "string" },
+        "error": { "type": "string" },
+        "riskSignals": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "missingEvidence": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "changedFiles": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "missingEvidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidenceRequest" }
+    },
+    "suggestedNextEvidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidenceRequest" }
+    },
+    "semanticImpact": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "agentInstructions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "commandExperience": {
+      "type": "object",
+      "required": ["id", "at", "command", "exitCode", "timedOut", "durationMs", "failureSignature"],
+      "properties": {
+        "id": { "type": "string" },
+        "at": { "type": "string" },
+        "command": { "type": "string" },
+        "validationKey": { "type": "string" },
+        "exitCode": { "type": "integer" },
+        "timedOut": { "type": "boolean" },
+        "durationMs": { "type": "number", "minimum": 0 },
+        "failureSignature": {
+          "anyOf": [
+            { "type": "string" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidenceRequest": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "severity": { "type": "string" },
+        "reason": { "type": "string" },
+        "commands": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "description": "ACE project-local Codex hooks. Trust with /hooks before use.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .codex/hooks/ace-stop-handoff.js",
+            "timeout": 15,
+            "statusMessage": "Writing ACE experience handoff"
+          }
+        ]
+      }
+    ]
+  }
+}

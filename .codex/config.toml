@@ -1,0 +1,18 @@
+# Project-local Codex integration for ACE.
+# Codex loads project .codex config only when this project is trusted.
+
+[mcp_servers.ace]
+command = "node"
+args = ["src/mcp.js"]
+startup_timeout_sec = 10
+tool_timeout_sec = 60
+default_tools_approval_mode = "prompt"
+
+[mcp_servers.ace.tools.ace_experience]
+approval_mode = "auto"
+
+[mcp_servers.ace.tools.ace_status]
+approval_mode = "auto"
+
+[mcp_servers.ace.tools.ace_brief]
+approval_mode = "auto"

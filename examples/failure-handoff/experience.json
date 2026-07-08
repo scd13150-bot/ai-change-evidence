@@ -1,0 +1,242 @@
+{
+  "schema": "ace.experience-packet.v1",
+  "role": "engineering-experience-handoff",
+  "supersedes": [
+    "ace.agent-context.v1"
+  ],
+  "generatedAt": "2026-07-07T00:00:00.000Z",
+  "projectDir": "<example-project>",
+  "objective": "Repair renderer export flow without breaking package exports",
+  "experienceSummary": {
+    "status": "has-failed-validation",
+    "entries": 4,
+    "failedCommands": 1,
+    "passedCommands": 0,
+    "unresolvedFailedCommands": 1,
+    "resolvedFailedCommands": 0,
+    "doNotRepeatItems": 1,
+    "repeatedFailurePatterns": 0,
+    "evidenceStatus": "available",
+    "highMissingEvidence": 1,
+    "riskSignals": [
+      "source-without-tests",
+      "command-failure"
+    ],
+    "nextActionBias": "triage unresolved failure before proposing another fix"
+  },
+  "state": {
+    "entries": 4,
+    "notes": 1,
+    "commands": 1,
+    "passedCommands": 0,
+    "failedCommands": 1,
+    "unresolvedFailedCommands": 1,
+    "resolvedFailedCommands": 0,
+    "latestFailure": {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "command": "npm test",
+      "validationKey": "npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    },
+    "latestHistoricalFailure": {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "command": "npm test",
+      "validationKey": "npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    },
+    "repeatedFailures": []
+  },
+  "recentTimeline": [
+    {
+      "id": "objective-1",
+      "at": "2026-07-07T00:00:00.000Z",
+      "kind": "objective",
+      "text": "Repair renderer export flow without breaking package exports",
+      "tags": []
+    },
+    {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "kind": "command",
+      "command": "npm test",
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    },
+    {
+      "id": "note-1",
+      "at": "2026-07-07T00:03:00.000Z",
+      "kind": "note",
+      "text": "Do not repeat rewriting the wasm package path; package exports already failed.",
+      "tags": [
+        "do-not-repeat"
+      ]
+    }
+  ],
+  "failedCommands": [
+    {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "command": "npm test",
+      "validationKey": "npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    }
+  ],
+  "unresolvedFailedCommands": [
+    {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "command": "npm test",
+      "validationKey": "npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    }
+  ],
+  "validation": {
+    "state": "failed",
+    "commands": 1,
+    "passed": 0,
+    "failed": 1,
+    "unresolvedFailures": 1,
+    "resolvedFailures": 0,
+    "latestFailure": {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "command": "npm test",
+      "validationKey": "npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    },
+    "latestHistoricalFailure": {
+      "id": "cmd-1",
+      "at": "2026-07-07T00:02:00.000Z",
+      "command": "npm test",
+      "validationKey": "npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 841,
+      "failureSignature": "npm test:Error: Cannot find module <path>"
+    },
+    "unresolvedFailureSignatures": [
+      "npm test:Error: Cannot find module <path>"
+    ],
+    "resolvedFailureSignatures": [],
+    "failureSignatures": [
+      "npm test:Error: Cannot find module <path>"
+    ],
+    "latestCommands": [
+      {
+        "id": "cmd-1",
+        "at": "2026-07-07T00:02:00.000Z",
+        "command": "npm test",
+        "validationKey": "npm test",
+        "exitCode": 1,
+        "timedOut": false,
+        "durationMs": 841,
+        "failureSignature": "npm test:Error: Cannot find module <path>"
+      }
+    ]
+  },
+  "invalidatedPaths": [
+    {
+      "kind": "do-not-repeat-note",
+      "text": "Do not repeat rewriting the wasm package path; package exports already failed."
+    }
+  ],
+  "doNotRepeat": [
+    "Do not repeat rewriting the wasm package path; package exports already failed."
+  ],
+  "evidence": {
+    "status": "available",
+    "headline": "1 changed file across source: 1.",
+    "categories": {
+      "source": 1
+    },
+    "riskSignals": [
+      {
+        "id": "source-without-tests",
+        "severity": "medium",
+        "message": "Source changed without tests."
+      },
+      {
+        "id": "command-failure",
+        "severity": "high",
+        "message": "A collected validation command failed."
+      }
+    ],
+    "missingEvidence": [
+      {
+        "id": "test-output",
+        "severity": "high",
+        "reason": "Source changed, but no successful test command output was collected.",
+        "commands": [
+          "npm test"
+        ]
+      }
+    ],
+    "changedFiles": [
+      {
+        "status": "M",
+        "path": "src/render.js",
+        "category": "source",
+        "additions": 3,
+        "deletions": 1,
+        "untracked": false
+      }
+    ]
+  },
+  "missingEvidence": [
+    {
+      "id": "test-output",
+      "severity": "high",
+      "reason": "Source changed, but no successful test command output was collected.",
+      "commands": [
+        "npm test"
+      ]
+    },
+    {
+      "id": "failure-triage",
+      "severity": "high",
+      "reason": "A collected command failed; AI needs failure triage before a readiness claim.",
+      "commands": [
+        "npm test"
+      ]
+    }
+  ],
+  "suggestedNextEvidence": [
+    {
+      "id": "run-tests",
+      "reason": "Run the nearest project test command.",
+      "commands": [
+        "npm test"
+      ]
+    }
+  ],
+  "semanticImpact": {
+    "status": "not-collected"
+  },
+  "agentInstructions": [
+    "Read this experience packet before changing files.",
+    "Treat it as transferred engineering experience, not as final truth.",
+    "Do not repeat failed commands or approaches unless new evidence changes the inputs.",
+    "Run validation through ace run so command results become durable evidence.",
+    "Record abandoned paths with ace note, especially do-not-repeat warnings.",
+    "Before handing off, run ace brief or ace experience --json for the next agent."
+  ]
+}

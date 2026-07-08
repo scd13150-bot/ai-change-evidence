@@ -1,0 +1,57 @@
+{
+  "name": "ai-change-evidence",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Engineering experience handoff for AI coding agents.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scd13150/ai-change-evidence.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scd13150/ai-change-evidence/issues"
+  },
+  "homepage": "https://github.com/scd13150/ai-change-evidence#readme",
+  "bin": {
+    "ace": "./src/cli.js",
+    "ace-mcp": "./src/mcp.js"
+  },
+  "scripts": {
+    "check": "node --check src/cli.js && node --check src/evidence.js && node --check src/init.js && node --check src/ledger.js && node --check src/mcp.js && node --check src/redact.js && node --check scripts/smoke-package-install.js && node --check scripts/smoke-mcp-client.js && node --check scripts/stress-ledger-concurrency.js && node --check .codex/hooks/ace-stop-handoff.js",
+    "test": "node --test tests/*.test.js",
+    "smoke:mcp-client": "node scripts/smoke-mcp-client.js",
+    "stress:ledger": "node scripts/stress-ledger-concurrency.js",
+    "smoke:package-install": "node scripts/smoke-package-install.js",
+    "release:check": "npm run check && npm test && npm run smoke:mcp-client && npm run stress:ledger && npm run smoke:package-install && npm pack --dry-run",
+    "prepublishOnly": "npm run release:check"
+  },
+  "keywords": [
+    "ai-coding",
+    "experience-handoff",
+    "handoff",
+    "evidence",
+    "attempt-ledger"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "schemas",
+    ".codex/config.toml",
+    ".codex/hooks.json",
+    ".codex/hooks/ace-stop-handoff.js",
+    ".github/workflows/ace-pr-evidence.yml",
+    "docs",
+    "examples",
+    "README.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "LICENSE",
+    "ace.config.example.json"
+  ]
+}
