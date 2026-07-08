@@ -1,5 +1,9 @@
 # AI Change Evidence
 
+[![npm version](https://img.shields.io/npm/v/ai-change-evidence)](https://www.npmjs.com/package/ai-change-evidence)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/scd13150/ai-change-evidence/actions/workflows/ci.yml/badge.svg)](https://github.com/scd13150/ai-change-evidence/actions/workflows/ci.yml)
+
 AI Change Evidence (ACE) compiles engineering experience from AI coding attempts into portable handoff evidence.
 
 ACE is not a CodeGraph clone, a generic memory layer, or another AI code generator. It records attempts, failed commands, normalized failure signatures, do-not-repeat notes, validation output, semantic/risk evidence, missing evidence, and a compact packet the next agent can use across sessions, tools, and platforms.

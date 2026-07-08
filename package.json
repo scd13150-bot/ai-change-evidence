@@ -1,6 +1,6 @@
 {
   "name": "ai-change-evidence",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Engineering experience handoff for AI coding agents.",
   "repository": {
@@ -49,6 +49,7 @@
     "docs",
     "examples",
     "README.md",
+    "CHANGELOG.md",
     "CONTRIBUTING.md",
     "SECURITY.md",
     "LICENSE",
