@@ -1,6 +1,6 @@
 {
   "name": "ai-change-evidence",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Engineering experience handoff for AI coding agents.",
   "repository": {
@@ -12,8 +12,8 @@
   },
   "homepage": "https://github.com/scd13150/ai-change-evidence#readme",
   "bin": {
-    "ace": "./src/cli.js",
-    "ace-mcp": "./src/mcp.js"
+    "ace": "src/cli.js",
+    "ace-mcp": "src/mcp.js"
   },
   "scripts": {
     "check": "node --check src/cli.js && node --check src/evidence.js && node --check src/init.js && node --check src/ledger.js && node --check src/mcp.js && node --check src/redact.js && node --check scripts/smoke-package-install.js && node --check scripts/smoke-mcp-client.js && node --check scripts/stress-ledger-concurrency.js && node --check .codex/hooks/ace-stop-handoff.js",
